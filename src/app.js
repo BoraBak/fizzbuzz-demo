@@ -1,10 +1,17 @@
 const express = require('express')
+const bodyParser = require('body-parser')
+const {calcFizzBuzz} = require("./fizzbuzz")
 
 const port = 3000
 const app = express()
+app.use(bodyParser.json())
 
 app.post('/fizzbuzz', (req, res) => {
-    res.send("result from POST")
+    const fb = calcFizzBuzz()
+    const count = req.body.count
+    let result = `result for the number ${count} is: ${fb(count)}`;
+
+    res.send(result)
 })
 
 app.use((req, res) => {
