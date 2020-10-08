@@ -6,11 +6,11 @@ module.exports.calcFizzBuzz = function () {
             const multipleOfFive = i % 5 === 0
 
             if (multipleOfThree && multipleOfFive) {
-                result += 'fizzbuzz'
+                result += 'Fizzbuzz'
             } else if (multipleOfThree) {
-                result += 'fizz'
+                result += 'Fizz'
             } else if (multipleOfFive) {
-                result += 'buzz'
+                result += 'Buzz'
             } else {
                 result += i
             }
