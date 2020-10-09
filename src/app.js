@@ -39,4 +39,6 @@ app.use((req, res) => {
     res.status(404).send(err)
 })
 
-app.listen(port, () => console.log(`fizzbuzz-demo app listening on port ${port}!`))
+let server = app.listen(port, () => console.log(`fizzbuzz-demo app listening on port ${port}!`));
+
+module.exports = {app, server}

@@ -36,6 +36,8 @@
 
 
 #### Docker
+- Pull Docker image
+    - `docker pull borab/fizzbuzz-demo`
 - Build an image
     - `docker build -t buzz .`
         - `-t buzz ` - assign a name to the container
