@@ -23,7 +23,7 @@
           --data '{"count": 10}' \
           http://localhost:3000/fizzbuzz
           ```
-        - Output: `result for the number 10 is: 12Fizz4BuzzFizz78FizzBuzz` | 200 OK
+        - Output: _`Result for the number 10 is: 12Fizz4BuzzFizz78FizzBuzz`_ | 200 OK
 
     - Invalid input
         - ```
@@ -32,19 +32,29 @@
           --data '{"count": "10ddd"}' \
           http://localhost:3000/fizzbuzz
           ```
-        - Output: `{"error":"Invalid input!"}` | 400 Bad Request
+        - Output: _`{"error":"Invalid input!"}`_ | 400 Bad Request
 
 
 #### Docker
 - Pull Docker image
-    - `docker pull borab/fizzbuzz-demo`
+    - _`docker pull borab/fizzbuzz-demo`_
 - Build an image
-    - `docker build -t buzz .`
+    - _`docker build -t buzz .`_
         - `-t buzz ` - assign a name to the container
         - `.` - the location of the Dockerfile
 - Run the image  
-    - `docker run -p 3000:3000 --name=fizzbuzz buzz`
+    - _`docker run -p 3000:3000 --name=fizzbuzz buzz`_
         -  `-p 3000:3000` - exposing the ports [(further info.)](https://docs.docker.com/engine/reference/commandline/run/#publish-or-expose-port--p---expose)
         - `--name=fizzbuzz` - assign a name to the container [(further info.)](https://docs.docker.com/engine/reference/commandline/run/#assign-name-and-allocate-pseudo-tty---name--it)
         - `buzz` - the image we've built above
         - Note: `-d` flag - optional if you want to run container in background and print container ID 
+
+#### Google Cloud Run
+- Use **curl** to send an HTTP request
+    - ```
+      curl -X POST \
+      --header "Content-Type: application/json" \  
+      --data '{"count": 10}' \  
+      https://fizzbuzz-demo-srvc-gbbtnofsga-uc.a.run.app/fizzbuzz
+      ```
+    - **Output:** _`Result for the number 10 is: 12Fizz4BuzzFizz78FizzBuzz`_
