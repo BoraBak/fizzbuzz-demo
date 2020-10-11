@@ -7,6 +7,8 @@
     - For multiples of '5' print "Buzz" instead of the number
     - For the multiples of both '3' and '5' print "Fizzbuzz" instead of the number
 - [Reference (wiki)](https://en.wikipedia.org/wiki/Fizz_buzz)
+- Assumption - all numbers are valid input. This applies even if the numbers are '-5' or '0'.  
+Simply, in this case, the result will be empty ''
 
 #### API
 - An api which includes a single endpoint `/fizzbuzz` that accepts `POST` input
