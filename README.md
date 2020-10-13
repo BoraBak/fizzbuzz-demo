@@ -11,7 +11,7 @@
 #### API
 - An api which includes a single endpoint `/fizzbuzz` that accepts `POST` input
 - `POST` accepts `application/json` type and format is `{"count": 10}`
-- All other HTTP request methods return a not-supported HTTP error
+- All other HTTP request methods return a not-supported HTTP error with 405 error code
 - All other routes return a 404 error code
 
 
@@ -23,7 +23,7 @@
           --data '{"count": 10}' \
           http://localhost:3000/fizzbuzz
           ```
-        - Output: _`Result for the number 10 is: 12Fizz4BuzzFizz78FizzBuzz`_ | 200 OK
+        - Output: _`{"response":"1,2,Fizz,4,Buzz,Fizz,7,8,Fizz,Buzz","error":null}`_ | 200 OK
 
     - Invalid input
         - ```
@@ -32,7 +32,7 @@
           --data '{"count": "10ddd"}' \
           http://localhost:3000/fizzbuzz
           ```
-        - Output: _`{"error":"Invalid input!"}`_ | 400 Bad Request
+        - Output: _`{"error":"Invalid input!","response":""}`_ | 400 Bad Request
 
 
 #### Docker
@@ -50,11 +50,20 @@
         - Note: `-d` flag - optional if you want to run container in background and print container ID 
 
 #### Google Cloud Run
-- Use **curl** to send an HTTP request
-    - ```
-      curl -X POST \
-      --header "Content-Type: application/json" \  
-      --data '{"count": 10}' \  
-      https://fizzbuzz-demo-srvc-gbbtnofsga-uc.a.run.app/fizzbuzz
-      ```
-    - **Output:** _`Result for the number 10 is: 12Fizz4BuzzFizz78FizzBuzz`_
+- Building Containers using Cloud Build
+    - You can build your image on Google Cloud. [Instructions link.](https://cloud.google.com/run/docs/building/containers#builder)
+    - For example: _`gcloud builds submit -t gcr.io/do-it-292020/fizzbuzz-demo`_
+    - You need to be able to see the image in [Container Registry](https://console.cloud.google.com/gcr)
+- Deploying container images
+    - You can deploy a container using the Cloud Console, the gcloud command line or from a YAML configuration file.
+        - My recommendation is using the Cloud Console, which is very intuitive. [Instructions link.](https://cloud.google.com/run/docs/deploying#service)
+    - You need to be able to see the container image in [Services](https://console.cloud.google.com/run)
+- Running the service
+    - I chose to use **curl** in order to send HTTP request:
+        - ```
+          curl -X POST \
+          --header "Content-Type: application/json" \  
+          --data '{"count": 10}' \  
+          https://fizzbuzz-demo-srvc-gbbtnofsga-uc.a.run.app/fizzbuzz
+          ```
+    - **Expected Output:** _`{"response":"1,2,Fizz,4,Buzz,Fizz,7,8,Fizz,Buzz","error":null}`_
